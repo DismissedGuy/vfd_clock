@@ -123,6 +123,9 @@ void  Cmd_Server_Exec ()
 
         // Debug-printing
         Cmd_Server_Client_Dump(Serial_Get_Cmd_Proc(),client_index);
+
+        // Print input line
+        Cmd_Server_Client_Emit_Inp_Line(&cmd_server_clients[client_index].cmd_proc);
       }
     }
   }
@@ -149,6 +152,8 @@ void  Cmd_Server_Exec ()
         {
           // Feed the received data bytes to the command processor
           Cmd_Proc_Feed(&cmd_server_clients[client_index].cmd_proc,(char*)buf,xfrd);
+
+          Cmd_Server_Client_Emit_Inp_Line(&cmd_server_clients[client_index].cmd_proc);
         }
       }
     }
@@ -185,6 +190,17 @@ void  Cmd_Server_Dump (CMD_PROC *p)
   {
       Cmd_Server_Client_Dump(p,client_index);
   }
+}
+
+
+void  Cmd_Server_Client_Emit_Inp_Line (CMD_PROC *p)
+{
+  CMD_SERVER_CLIENT  *client;
+
+  client = GetContAd(p,CMD_SERVER_CLIENT,cmd_proc);
+
+  // Write input line
+  client->client.write("> ", 2);
 }
 
 
