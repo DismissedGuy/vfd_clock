@@ -13,6 +13,7 @@ The following features are added::
 * timer.ino to avoid complications of 32bit overflow of millis() (only used in new functions)
 * New commands "help" and "system status"
 * Show firmware revision at boot time
+* Show a command prompt on the telnet interface
 
 If a BM\*280 sensor is connected and enabled, its temperature readings will be used and supersede other sensors.
 BM\*280 sensors are easily available on breakout boards. The sensor is simply connected via the I2C interface K7 (nomenclature as printed on the board and used in the elektor article - the schematics published on the project page labels this as K6 - take care not to confuse signals as some boards have a different pinout than the connector). No further circuitry is necessary, as signal levels match and pull-ups are provided by the VFD clock board.
